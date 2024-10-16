@@ -1,0 +1,10 @@
+# ninja log v5
+1	297	7489600589283897	build.ninja	a260af74efe8a1d0
+0	222	7489600591425747	AT_KRL_STRUCTS_autogen/timestamp	3999a2ee158d6de2
+0	222	7489600591425747	AT_KRL_STRUCTS_autogen/mocs_compilation.cpp	3999a2ee158d6de2
+0	222	7489600591425747	C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/AT_KRL_STRUCTS_autogen/timestamp	3999a2ee158d6de2
+0	222	7489600591425747	C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/AT_KRL_STRUCTS_autogen/mocs_compilation.cpp	3999a2ee158d6de2
+224	1025	7489600599640892	CMakeFiles/AT_KRL_STRUCTS.dir/AT_KRL_STRUCTS_autogen/mocs_compilation.cpp.obj	1af8b9ba1fd30a38
+225	1103	7489600600426375	CMakeFiles/AT_KRL_STRUCTS.dir/main.cpp.obj	9389c39e2b7ea3ca
+223	1120	7489600600586128	CMakeFiles/AT_KRL_STRUCTS.dir/mainwindow.cpp.obj	bd1ecc804ed8c7b9
+1120	1262	7489600601971492	AT_KRL_STRUCTS.exe	59674327df5ed258
