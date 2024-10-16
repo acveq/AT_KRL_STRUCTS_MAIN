@@ -1,9 +1,0 @@
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/AT_KRL_STRUCTS.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/list_install_components.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/install.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/install/local.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/install/strip.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/AT_KRL_STRUCTS_autogen_timestamp_deps.dir
-C:/Users/Aleksey/Documents/AT_KRL_STRUCTS/build/Desktop_Qt_5_15_2_MinGW_32_bit-Debug/CMakeFiles/AT_KRL_STRUCTS_autogen.dir
