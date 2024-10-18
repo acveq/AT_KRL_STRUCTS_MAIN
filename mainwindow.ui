@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1271</width>
-    <height>377</height>
+    <width>1418</width>
+    <height>707</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,24 +26,55 @@
        <string>Импорт</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_4">
+       <item row="8" column="0" colspan="4">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="3">
+        <widget class="QPlainTextEdit" name="teColumnTick">
+         <property name="maximumSize">
+          <size>
+           <width>800</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>created_at</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="label_7">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Столбец с тактами</string>
+          <string>Кол-во деревьев</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" colspan="2">
+       <item row="4" column="1" colspan="3">
         <widget class="QPlainTextEdit" name="tePK">
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
-           <height>35</height>
+           <width>800</width>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
@@ -51,24 +82,18 @@
            <pointsize>12</pointsize>
           </font>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="1" colspan="2">
-        <widget class="QPlainTextEdit" name="teAllAttrs">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>35</height>
-          </size>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>id</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="font">
           <font>
@@ -77,84 +102,6 @@
          </property>
          <property name="text">
           <string>Таблица со св-вами</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Список св-в</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" colspan="2">
-        <widget class="QPlainTextEdit" name="teColumnTick">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Таблица с классами</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Primary Key</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPlainTextEdit" name="teDBFile">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="btnOpenDB">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Открыть</string>
          </property>
         </widget>
        </item>
@@ -170,48 +117,78 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1" colspan="2">
-        <widget class="QPlainTextEdit" name="teAttrName">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_7">
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_6">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Кол-во деревьев</string>
+          <string>Таблица с классами</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
-        <widget class="QSpinBox" name="sbTreeCount">
+       <item row="2" column="1">
+        <widget class="QPlainTextEdit" name="teAttrName">
+         <property name="maximumSize">
+          <size>
+           <width>800</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>porter_data</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="btnOpenDB">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Открыть</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_10">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="text">
+          <string>Столбец с классами</string>
+         </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QPlainTextEdit" name="teClassTable">
+       <item row="6" column="1" colspan="3">
+        <widget class="QPlainTextEdit" name="teAllAttrs">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>105</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>35</height>
+           <height>50000</height>
           </size>
          </property>
          <property name="font">
@@ -219,13 +196,104 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>market_id
+total_onshift_dashers
+total_busy_dashers
+num_distinct_items</string>
+         </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QPushButton" name="btnReadClasses">
+       <item row="0" column="1" colspan="2">
+        <widget class="QPlainTextEdit" name="teDBFile">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="plainText">
+          <string>C:/Users/Aleksey/Desktop/Study/ОТЧЁТ ЛЕТНЯЯ/БД/Porter Dataset/porter_delivery.sqlite</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_4">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Столбец с тактами</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Столбец PK</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="1">
+        <widget class="QSpinBox" name="sbTreeCount">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>10000</number>
+         </property>
+         <property name="value">
+          <number>800</number>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0" colspan="4">
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" rowspan="2">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Список св-в</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="3">
+        <widget class="QPushButton" name="btnReadClasses">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -233,11 +301,59 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
-        <widget class="QPushButton" name="btnAddTrees">
+       <item row="9" column="1">
+        <widget class="QPlainTextEdit" name="teClassTable">
+         <property name="maximumSize">
+          <size>
+           <width>800</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>classes</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1" colspan="3">
+        <widget class="QPlainTextEdit" name="teClassTable_2">
+         <property name="maximumSize">
+          <size>
+           <width>800</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="plainText">
+          <string>class</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="3">
+        <widget class="QPushButton" name="btnAddTrees">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -245,15 +361,79 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="Line" name="line_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="4">
+        <widget class="QTableView" name="tableView">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QPushButton" name="btnReadTable">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Прочитать названия</string>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="label_8">
+      <property name="maximumSize">
+       <size>
+        <width>450</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>ЛОГ:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QTextEdit" name="teLog">
+      <property name="maximumSize">
+       <size>
+        <width>450</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
      </widget>
     </item>
     <item row="0" column="1">
      <widget class="QGroupBox" name="groupBox_2">
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>10000</height>
+        <width>450</width>
+        <height>155</height>
        </size>
       </property>
       <property name="font">
@@ -270,13 +450,16 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>35</height>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
          </property>
         </widget>
        </item>
@@ -285,13 +468,16 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>35</height>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
          </property>
         </widget>
        </item>
@@ -324,7 +510,7 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>35</height>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
@@ -332,13 +518,16 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
         </widget>
        </item>
        <item row="0" column="2">
         <widget class="QPushButton" name="btnExportDirS">
          <property name="font">
           <font>
-           <pointsize>12</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -362,7 +551,7 @@
         <widget class="QPushButton" name="btnExportDirR">
          <property name="font">
           <font>
-           <pointsize>12</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -374,7 +563,7 @@
         <widget class="QPushButton" name="btnExportDirP">
          <property name="font">
           <font>
-           <pointsize>12</pointsize>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -385,21 +574,6 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QTextEdit" name="teLog"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label_8">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>ЛОГ:</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -407,7 +581,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1271</width>
+     <width>1418</width>
      <height>22</height>
     </rect>
    </property>

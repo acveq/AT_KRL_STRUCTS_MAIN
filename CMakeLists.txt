@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Sql)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -22,6 +22,7 @@ add_executable(AT_KRL_STRUCTS_MAIN
 )
 
 target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE Qt5::Sql)
 set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.AT_KRL_STRUCTS_MAIN)
 
 set_target_properties(AT_KRL_STRUCTS_MAIN PROPERTIES
