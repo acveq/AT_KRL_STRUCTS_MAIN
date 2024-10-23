@@ -7,6 +7,7 @@
 #include "QtSql/QSqlDatabase"
 #include "QtSql/QSqlQueryModel"
 #include "QtSql/QSqlQuery"
+#include "database_wrapper.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -31,6 +32,11 @@ private slots:
     void btnExportDirP_clicked();
     void addLog(QString msg);
 private:
+    QString mainTableName = "";
+    QString classTableName = "";
+    database_wrapper_t * dw_t = nullptr;
+    QSqlQueryModel* mainTableModel = nullptr;
+    QSqlQueryModel * classTableModel = nullptr;
     QString fileName = "";
     QSqlDatabase maindb;
     Ui::MainWindow *ui;

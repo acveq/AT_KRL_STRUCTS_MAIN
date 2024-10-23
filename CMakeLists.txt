@@ -16,6 +16,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        database_wrapper.h
+        database_wrapper.cpp
 )
 add_executable(AT_KRL_STRUCTS_MAIN
     ${PROJECT_SOURCES}

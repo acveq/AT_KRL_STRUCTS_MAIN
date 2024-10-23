@@ -41,34 +41,46 @@ void MainWindow::btnReadTable_clicked(){
     else{
         addLog("DB successfully opened");
     }
-    QString mainTable = ui->teAttrName->toPlainText();
-    QSqlQueryModel* modal = new QSqlQueryModel();
+    mainTableName = ui->teAttrName->toPlainText();
+    mainTableModel = new QSqlQueryModel();
     QSqlQuery *qry = new QSqlQuery(maindb);
-    qry->prepare("Select * FROM "+mainTable);
+    qry->prepare("Select * FROM "+mainTableName);
     qry->exec();
-    modal->setQuery(*qry);
-    ui->tableView->setModel(modal);
+    mainTableModel->setQuery(*qry);
+    ui->tableView->setModel(mainTableModel);
     addLog("Main table loaded");
     addLog("Added data to Table View");
 }
 void MainWindow::btnReadClasses_clicked(){
     addLog("Read classes table");
-    QString classTable = ui->teClassTable->toPlainText();
-    QSqlQueryModel* modal = new QSqlQueryModel();
+    classTableName = ui->teClassTable->toPlainText();
+    classTableModel = new QSqlQueryModel();
     QSqlQuery *qry = new QSqlQuery(maindb);
-    qry->prepare("Select * FROM "+classTable);
+    qry->prepare("Select * FROM "+classTableName);
     qry->exec();
-    modal->setQuery(*qry);
-
+    classTableModel->setQuery(*qry);
     addLog("Classes table loaded");
 }
 void MainWindow::btnAddTrees_clicked(){
     addLog("Now need to create " +QString::number(ui->sbTreeCount->value()) + " trees ");
-    addLog("1 - Need to validate both tables");
-    addLog("ERROR: Main table is NOT validated");
-    addLog("ERROR: Class table is NOT validated");
-    addLog("Cant create " + QString::number(ui->sbTreeCount->value()) + " trees. Check logs");
-
+    addLog("Need to validate both tables");
+    if(mainTableModel != nullptr && classTableModel != nullptr){
+        if(mainTableModel->rowCount() > 0 && classTableModel->rowCount() >  0){
+            maindb.close();
+            addLog("BOTH TABLES are validated");
+            dw_t = new database_wrapper_t;
+            addLog(dw_t->init_database(fileName.toStdString()));
+            addLog(dw_t->save_mapping(classTableName, ui->tePK->toPlainText(), ui->teColumnTick->toPlainText(), ui->teAllAttrs->toPlainText(), classTableName, ui->teClassColumn->toPlainText()));
+        }
+        else{
+            addLog("ERROR: Main table is NOT validated");
+            addLog("ERROR: Class table is NOT validated");
+            addLog("Cant create " + QString::number(ui->sbTreeCount->value()) + " trees. Check logs");
+        }
+    }
+    else{
+        addLog("ERROR: cant load table");
+    }
 }
 void MainWindow::btnExportDirS_clicked(){
 
