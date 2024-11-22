@@ -7,7 +7,9 @@
 #include "QtSql/QSqlDatabase"
 #include "QtSql/QSqlQueryModel"
 #include "QtSql/QSqlQuery"
-#include "database_wrapper.h"
+#include <QtConcurrent/QtConcurrent>
+
+class model_t;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,9 +24,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void prepareInterface();
 private slots:
     void btnOpenDB_clicked();
     void btnReadTable_clicked();
+    void btnReadColums_clicked();
     void btnReadClasses_clicked();
     void btnAddTrees_clicked();
     void btnExportDirS_clicked();
@@ -32,14 +36,23 @@ private slots:
     void btnExportDirP_clicked();
     void addLog(QString msg);
 private:
+    Ui::MainWindow *ui;
+    QString fileName = "";
+
     QString mainTableName = "";
-    QString classTableName = "";
-    database_wrapper_t * dw_t = nullptr;
+    QString idMainTableColumnName = "";
+    QString tickMainTableColumnName = "";
+    QString propertyMainTableColumnNames = "";
+    QString classTable = "";
+    QString nameClassTableColumn = "";
+
+    model_t * model = nullptr;
     QSqlQueryModel* mainTableModel = nullptr;
     QSqlQueryModel * classTableModel = nullptr;
-    QString fileName = "";
     QSqlDatabase maindb;
-    Ui::MainWindow *ui;
 
+
+    QFuture<void> modelInitFuture;
+    QFuture<void> modelSetnamesFuture;
 };
 #endif // MAINWINDOW_H

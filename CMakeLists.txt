@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
 )
 add_executable(AT_KRL_STRUCTS_MAIN
     ${PROJECT_SOURCES}
+    model_t.cpp model_t.h tree_node_t.cpp tree_node_t.h tree_t.cpp tree_t.h
 )
 
 target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

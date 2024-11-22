@@ -105,14 +105,26 @@ QString database_wrapper_t::save_mapping(const QString& table_name, const QStrin
 }
 
 string database_wrapper_t::get_property(const int object_id, const int property_id, const int time_id) {
-  string buf = "select ";
-  buf += properties[property_id] + " from " + property_table + " where ";
-  buf += id_column + "=" + ids[object_id] + " and " + time_column + "=" + times[time_id];
-  QSqlQuery query(buf.c_str());
-  string result;
-  while (query.next())
-    result = query.value(0).toString().toStdString();
-  return result;
+    // string buf = "select ";
+    // buf +=properties[property_id];
+    // buf += " from " + property_table + " where ";
+    // buf += id_column + "=\"" + ids[object_id] + "\" and " + time_column + "=\"" + times[time_id]+"\"";
+
+    QString buff = "select " + QString::fromStdString(properties[property_id]) + " from " +
+                   QString::fromStdString(property_table) + " where " +  QString::fromStdString(id_column) + "=\"" +
+                   QString::fromStdString(ids[object_id])+ "\" and " + QString::fromStdString(time_column)+
+                   + "=\"" +  QString::fromStdString(times[time_id]) +"\"";
+
+    //QString buff = QString::fromStdString(buf);
+
+    QSqlQuery query(buff);
+    string result;
+    //qDebug()<<buff.toUtf8().constData();
+
+    while (query.next())
+        result = query.value(0).toString().toStdString();
+
+    return result;
 }
 
 string database_wrapper_t::get_class(const int object_id) {

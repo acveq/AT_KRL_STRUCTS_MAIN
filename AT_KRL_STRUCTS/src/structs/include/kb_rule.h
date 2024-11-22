@@ -14,35 +14,34 @@ class KBInstruction {
 public:
     KBEntity* owner;
     xmlNodePtr xml;
-
-    static std::unique_ptr<KBInstruction> from_xml(xmlNodePtr element);
-    std::string krl() const;
+    static unique_ptr<KBInstruction> from_xml(xmlNodePtr element);
+    string krl() const;
     void validate(KBEntity* kb);
 };
 
 class KBRule : public KBEntity {
 public:
-    std::string id;
-    std::unique_ptr<Evaluatable> condition;
-    std::vector<std::unique_ptr<KBInstruction>> instructions;
-    std::optional<std::vector<std::unique_ptr<KBInstruction>>> else_instructions;
-    std::string meta;
-    std::string desc;
-    std::optional<std::string> evaluated_condition;
+    string id;
+    unique_ptr<Evaluatable> condition;
+    vector<unique_ptr<KBInstruction>> instructions;
+    optional<vector<unique_ptr<KBInstruction>>> else_instructions;
+    string meta;
+    string desc;
+    optional<string> evaluated_condition;
 
-    explicit KBRule(const std::string& id, std::unique_ptr<Evaluatable> condition,
-           std::vector<std::unique_ptr<KBInstruction>> instructions,
-           std::optional<std::vector<std::unique_ptr<KBInstruction>>> else_instructions = std::nullopt,
-           const std::string& meta = "simple", const std::string& desc = "");
+    explicit KBRule(const string& id, unique_ptr<Evaluatable> condition,
+           vector<unique_ptr<KBInstruction>> instructions,
+           optional<vector<unique_ptr<KBInstruction>>> else_instructions = nullopt,
+           const string& meta = "simple", const string& desc = "");
 
-    std::map<std::string, std::string> attrs() const;
-    std::vector<xmlNodePtr> inner_xml() const;
-    static std::unique_ptr<KBRule> from_xml(xmlNodePtr xml);
-    std::map<std::string, std::string> to_dict() const;
-    static std::unique_ptr<KBRule> from_dict(const std::map<std::string, std::string>& d);
-    std::string krl() const;
+    map<string, string> attrs() const;
+    vector<xmlNodePtr> inner_xml() const;
+    static unique_ptr<KBRule> from_xml(xmlNodePtr xml);
+    map<string, string> to_dict() const;
+    static unique_ptr<KBRule> from_dict(const map<string, string>& d);
+    string krl() const;
     void validate(KBEntity* kb);
-    std::string xml_owner_path() const;
+    string xml_owner_path() const;
 };
 
 #endif // KBRULE_H

@@ -32,7 +32,6 @@ class database_wrapper_t {
 
   private:
     QSqlDatabase sdb;
-
     string property_table;
     string id_column;
     string time_column;
