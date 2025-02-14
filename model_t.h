@@ -8,6 +8,7 @@
 #include <iostream>
 #include <QObject>
 
+
 using std::string;
 
 class model_t : public QObject {
@@ -24,7 +25,7 @@ signals:
 private:
     database_wrapper_t dbw;
     vector<tree_t*> trees;
-    //knowledge_field_t kf;
+    knowledge_base_t kb;
 };
 
 #endif

@@ -22,10 +22,14 @@ set(PROJECT_SOURCES
 add_executable(AT_KRL_STRUCTS_MAIN
     ${PROJECT_SOURCES}
     model_t.cpp model_t.h tree_node_t.cpp tree_node_t.h tree_t.cpp tree_t.h
+    knowledge_base_t.cpp knowledge_base_t.h
 )
+
+add_subdirectory("AT_KRL_STRUCTS")
 
 target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE Qt5::Sql)
+target_link_libraries(AT_KRL_STRUCTS_MAIN PRIVATE AT_KRL_STRUCTS)
 set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.AT_KRL_STRUCTS_MAIN)
 
 set_target_properties(AT_KRL_STRUCTS_MAIN PROPERTIES
@@ -42,4 +46,6 @@ install(TARGETS AT_KRL_STRUCTS_MAIN
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-add_subdirectory("AT_KRL_STRUCTS")
+
+
+

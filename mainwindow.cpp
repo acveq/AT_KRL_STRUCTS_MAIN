@@ -118,6 +118,9 @@ void MainWindow::btnAddTrees_clicked(){
                 i++;
             }
             //modelInitFuture = QtConcurrent::run(static_cast<model_t*>(model), &model_t::init, fileName.toStdString(), names);
+
+            addLog("RESULT: All trees added.");
+            addLog("NOTE: Do not forget to select file and save results.: All trees added.");
         }
         else{
             addLog("ERROR: Main table is NOT validated");
@@ -139,6 +142,8 @@ void MainWindow::btnExportDirR_clicked(){
     std::ofstream innerout(ui->ExportDirP->toPlainText().toStdString());
     std::ofstream xmlout("C://results/xmlout.xml");
     model->rulealize(textout, innerout, xmlout);
+
+
 }
 void MainWindow::btnExportDirP_clicked(){
 

@@ -14,9 +14,8 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
 include_directories(${CMAKE_SOURCE_DIR}/src/structs/libs/libxml2/include/)
 include_directories(${CMAKE_SOURCE_DIR}/src/structs/libs/jsoncpp/include/)
 
-add_library(${PROJECT_NAME} STATIC
-            src/structs/libs/libxml2/lib/libxml2.lib
 
+add_library(${PROJECT_NAME} STATIC
             src/structs/include/exceptions.h
             src/structs/include/utils.h
 
@@ -38,7 +37,7 @@ add_library(${PROJECT_NAME} STATIC
             src/structs/src/membership_function.cpp
             src/structs/src/non_factor.cpp
             src/structs/libs/jsoncpp/include/CMakeLists.txt
-
+            src/structs/libs/libxml2/include/CMakeLists.txt
             src/tests/kb_entity_tests.cpp
             src/tests/kb_operation_tests.cpp
             src/tests/kb_reference_tests.cpp
@@ -46,15 +45,17 @@ add_library(${PROJECT_NAME} STATIC
             src/tests/kb_value_tests.cpp
             src/tests/membership_function_tests.cpp
             src/tests/non_factor_tests.cpp
-
             src/structs/libs/googletest/CMakeLists.txt
+
         )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     src/
+    src/structs/
     src/structs/include/
     src/structs/src/
     src/structs/libs/libxml2/include/
     src/structs/libs/jsoncpp/include/
     src/structs/libs/googletest/include/
 )
+

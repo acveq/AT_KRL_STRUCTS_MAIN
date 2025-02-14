@@ -8,7 +8,11 @@ QString database_wrapper_t::init_database(const std::string& name) {
   QString result = "";
   if (sdb.isOpen())
     sdb.close();
+
+  qDebug()<<"db name"<<name.c_str();
   sdb.setDatabaseName(name.c_str());
+
+
   if (sdb.open()) {
     result.append("Success\n");
     result.append("Tables: ");
@@ -110,12 +114,15 @@ string database_wrapper_t::get_property(const int object_id, const int property_
     // buf += " from " + property_table + " where ";
     // buf += id_column + "=\"" + ids[object_id] + "\" and " + time_column + "=\"" + times[time_id]+"\"";
 
+
+
     QString buff = "select " + QString::fromStdString(properties[property_id]) + " from " +
                    QString::fromStdString(property_table) + " where " +  QString::fromStdString(id_column) + "=\"" +
-                   QString::fromStdString(ids[object_id])+ "\" and " + QString::fromStdString(time_column)+
+                   QString::fromStdString(ids[object_id])+ "\" and " + QString::fromStdString(time_column).split(" ").at(0)+
                    + "=\"" +  QString::fromStdString(times[time_id]) +"\"";
 
     //QString buff = QString::fromStdString(buf);
+    qDebug()<<"REQUEST BUFF"<<buff;
 
     QSqlQuery query(buff);
     string result;

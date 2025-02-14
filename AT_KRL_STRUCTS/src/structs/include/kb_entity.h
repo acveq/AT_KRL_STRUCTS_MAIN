@@ -4,12 +4,13 @@
 #include <string>
 #include <map>
 #include <vector>
+
 #include <libxml/tree.h>
 #include <json/value.h>
 
 using namespace std;
 
-class KnowledgeBase;
+//class KnowledgeBase;
 
 class KBEntity
 {
@@ -26,7 +27,8 @@ public:
     virtual xmlNodePtr toXML() const;
     virtual vector<xmlNodePtr> getInnerXML() const;
     virtual Json::Value toJSON() const;
-    virtual bool validate(const KnowledgeBase &kb) { return true; };
+    //virtual bool validate(const KnowledgeBase &kb) { return true; };
+
     virtual ~KBEntity() { };
     virtual string getXMLOwnerPath() const { return ""; };
 

@@ -4,6 +4,8 @@
 #include <stack>
 #include <set>
 
+//#include "AT_KRL_STRUCTS/src/KB_include/knowledge_field_t.h"
+
 using std::pair;
 using std::endl;
 
@@ -38,24 +40,24 @@ tree_t::tree_t(database_wrapper_t& dbw) : dbw(dbw)
     }
   }
 
-  // std::cerr << "ID: ";
-  // for (auto it : ids)
-  //   std::cerr << it << " ";
-  // std::cerr << endl;
+  std::cerr << "ID: ";
+  for (auto it : ids)
+    std::cerr << it << " ";
+  std::cerr << endl;
 
-  // std::cerr << "PROPS: ";
-  // for (auto it : properties)
-  //   std::cerr << dbw.get_property_name_by_id(it) << " ";
-  // std::cerr << endl;
+  std::cerr << "PROPS: ";
+  for (auto it : properties)
+    std::cerr << dbw.get_property_name_by_id(it) << " ";
+  std::cerr << endl;
 
-  // std::cerr << "TIMES: ";
-  // for (auto it : times)
-  //   std::cerr << it << " ";
-  // std::cerr << endl;
+  std::cerr << "TIMES: ";
+  for (auto it : times)
+    std::cerr << it << " ";
+  std::cerr << endl;
 
   root = new tree_node_t(dbw);
   root->set_ids(ids);
-qDebug()<<"times.size"<<times.size();
+    qDebug()<<"times.size"<<times.size();
   split(root);
 }
 
@@ -87,7 +89,9 @@ void tree_t::split(tree_node_t* node, const int depth) {
                 vector<pair<int, int>> current_objects;
                 for (const int id : node_ids) {
                     std::string prop = dbw.get_property(id, prop_id, time_id);
-                    qDebug()<<QString::fromStdString(prop);
+
+
+                    qDebug()<<"Prop"<<QString::fromStdString(prop);
 
                     if(QString::fromStdString(prop) == ""){
                         break;
@@ -186,130 +190,130 @@ string tree_t::serialize(tree_node_t* node) const {
    return serialize(root);
 }
 
-// void tree_t::add_rules(tree_node_t* node, knowledge_field_t& kf, vector<event_interval_condition_t*> up_conditions, int start_time, int last_time) const {
-//   string current_time_name = "Текущий_такт_" + std::to_string((start_time + last_time - 1) % last_time);
-//   string next_time_name = "Текущий_такт_" + std::to_string(start_time % last_time);
-//   if (node->is_leaf()) {
-//     string name = string("Правило_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
-//     const temporal_entity_t* rule = kf.add_rule(name);
+void tree_t::add_rules(tree_node_t* node, knowledge_field_t& kb, vector<event_interval_condition_t*> up_conditions, int start_time, int last_time) const {
+  string current_time_name = "Текущий_такт_" + std::to_string((start_time + last_time - 1) % last_time);
+  string next_time_name = "Текущий_такт_" + std::to_string(start_time % last_time);
+  if (node->is_leaf()) {
+    string name = string("Правило_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
+    const temporal_entity_t* rule = kb.add_rule(name);
 
-//     complex_condition_t* condition = new complex_condition_t;
-//     condition->set_op("&");
-//     for (condition_t* ptr : up_conditions) {
-//       event_interval_condition_t* cid_ptr = dynamic_cast<event_interval_condition_t*>(ptr);
-//       if (cid_ptr) {
-//         condition_t* nested_condition = new event_interval_condition_t(cid_ptr);
-//         condition->add_condition(nested_condition);
-//       }
-//     }
-//     event_event_condition_t* current_time_is_last_condition = new event_event_condition_t(kf.get_event_id_by_name(current_time_name), kf.get_event_id_by_name(next_time_name));
-//     current_time_is_last_condition->set_op("a");
-//     condition->add_condition(current_time_is_last_condition);
+    complex_condition_t* condition = new complex_condition_t;
+    condition->set_op("&");
+    for (condition_t* ptr : up_conditions) {
+      event_interval_condition_t* cid_ptr = dynamic_cast<event_interval_condition_t*>(ptr);
+      if (cid_ptr) {
+        condition_t* nested_condition = new event_interval_condition_t(cid_ptr);
+        condition->add_condition(nested_condition);
+      }
+    }
+    event_event_condition_t* current_time_is_last_condition = new event_event_condition_t(kb.get_event_id_by_name(current_time_name), kb.get_event_id_by_name(next_time_name));
+    current_time_is_last_condition->set_op("a");
+    condition->add_condition(current_time_is_last_condition);
 
-//     action_int_t* result_action = new action_int_t;
-//     const temporal_object_t* counter = kf.get_object("Счётчик");
-//     result_action->set_object_id(counter->get_id());
-//     result_action->set_attribute_id(counter->get_attr_id_by_name(string("Голоса_за_") + node->get_class()));
-//     result_action->set_op("+=");
-//     result_action->set_value(1);
+    action_int_t* result_action = new action_int_t;
+    const temporal_object_t* counter = kb.get_object("Счётчик");
+    result_action->set_object_id(counter->get_id());
+    result_action->set_attribute_id(counter->get_attr_id_by_name(string("Голоса_за_") + node->get_class()));
+    result_action->set_op("+=");
+    result_action->set_value(1);
 
-//     kf.add_condition(rule, condition);
-//     kf.add_action(rule, result_action);
-//   } else {
-//     string name = string("Отрицательный_интервал_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
-//     event_interval_condition_t* less_condition = new event_interval_condition_t(kf.get_event_id_by_name(current_time_name), kf.get_interval_id_by_name(name));
-//     less_condition->set_op("f");
+    kb.add_condition(rule, condition);
+    kb.add_action(rule, result_action);
+  } else {
+    string name = string("Отрицательный_интервал_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
+    event_interval_condition_t* less_condition = new event_interval_condition_t(kb.get_event_id_by_name(current_time_name), kb.get_interval_id_by_name(name));
+    less_condition->set_op("f");
 
-//     name = string("Положительный_интервал_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
-//     event_interval_condition_t* greater_or_equal_condition = new event_interval_condition_t(kf.get_event_id_by_name(current_time_name), kf.get_interval_id_by_name(name));
-//     greater_or_equal_condition->set_op("f");
+    name = string("Положительный_интервал_") + std::to_string((uint64_t) node) + "_" + std::to_string(start_time);
+    event_interval_condition_t* greater_or_equal_condition = new event_interval_condition_t(kb.get_event_id_by_name(current_time_name), kb.get_interval_id_by_name(name));
+    greater_or_equal_condition->set_op("f");
 
-//     up_conditions.push_back(less_condition);
-//     add_rules(node->get_left(), kf, up_conditions, start_time, last_time);
-//     up_conditions.pop_back();
-//     up_conditions.push_back(greater_or_equal_condition);
-//     add_rules(node->get_right(), kf, up_conditions, start_time, last_time);
+    up_conditions.push_back(less_condition);
+    add_rules(node->get_left(), kb, up_conditions, start_time, last_time);
+    up_conditions.pop_back();
+    up_conditions.push_back(greater_or_equal_condition);
+    add_rules(node->get_right(), kb, up_conditions, start_time, last_time);
 
-//     delete less_condition;
-//     delete greater_or_equal_condition;
-//   }
-//}
+    delete less_condition;
+    delete greater_or_equal_condition;
+  }
+}
 
-// void tree_t::rulealize(knowledge_field_t& kf, const temporal_entity_t* main_object, const temporal_entity_t* timer, const temporal_entity_t*, int start_time, int last_time) const {
-//   std::stack<tree_node_t*> st;
-//   st.push(root);
-//   while (!st.empty()) {
-//     tree_node_t* cur = st.top();
-//     st.pop();
-//     if (cur->is_leaf())
-//       continue;
+void tree_t::rulealize(knowledge_field_t& kb, const temporal_entity_t* main_object, const temporal_entity_t* timer, const temporal_entity_t*, int start_time, int last_time) const {
+  std::stack<tree_node_t*> st;
+  st.push(root);
+  while (!st.empty()) {
+    tree_node_t* cur = st.top();
+    st.pop();
+    if (cur->is_leaf())
+      continue;
 
-//     string positive_name = "Положительный_интервал_" + std::to_string((uint64_t) cur) + "_" + std::to_string(start_time);
-//     const temporal_entity_t* positive = kf.add_interval(positive_name);
+    string positive_name = "Положительный_интервал_" + std::to_string((uint64_t) cur) + "_" + std::to_string(start_time);
+    const temporal_entity_t* positive = kb.add_interval(positive_name);
 
-//     int obj_id = main_object->get_id();
-//     int attr_id = dynamic_cast<const temporal_object_t*>(main_object)->get_attr_id_by_name(dbw.get_property_name_by_id(cur->get_prop_id()));
-//     string value = std::to_string(cur->get_prop_val());
-//     condition_t* left = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     left->set_op(">=");
+    int obj_id = main_object->get_id();
+    int attr_id = dynamic_cast<const temporal_object_t*>(main_object)->get_attr_id_by_name(dbw.get_property_name_by_id(cur->get_prop_id()));
+    string value = std::to_string(cur->get_prop_val());
+    condition_t* left = new condition_attr_value_const_t(obj_id, attr_id, value);
+    left->set_op(">=");
 
-//     obj_id = timer->get_id();
-//     attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
-//     value = std::to_string((stoi(dbw.get_time_name_by_id(cur->get_time_id())) + start_time) % last_time);
-//     condition_t* right = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     right->set_op("=");
+    obj_id = timer->get_id();
+    attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
+    value = std::to_string((stoi(dbw.get_time_name_by_id(cur->get_time_id())) + start_time) % last_time);
+    condition_t* right = new condition_attr_value_const_t(obj_id, attr_id, value);
+    right->set_op("=");
 
-//     complex_condition_t* start_condition = new complex_condition_t();
-//     start_condition->set_op("&");
-//     start_condition->add_condition(left);
-//     start_condition->add_condition(right);
+    complex_condition_t* start_condition = new complex_condition_t();
+    start_condition->set_op("&");
+    start_condition->add_condition(left);
+    start_condition->add_condition(right);
 
-//     kf.set_start_condition(positive, start_condition);
+    kb.set_start_condition(positive, start_condition);
 
-//     obj_id = timer->get_id();
-//     attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
-//     value = std::to_string((start_time + last_time - 1) % last_time);
-//     condition_t* end_condition = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     end_condition->set_op("=");
+    obj_id = timer->get_id();
+    attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
+    value = std::to_string((start_time + last_time - 1) % last_time);
+    condition_t* end_condition = new condition_attr_value_const_t(obj_id, attr_id, value);
+    end_condition->set_op("=");
 
-//     kf.set_end_condition(positive, end_condition);
+    kb.set_end_condition(positive, end_condition);
 
-//     string negative_name = "Отрицательный_интервал_" + std::to_string((uint64_t) cur) + "_" + std::to_string(start_time);
-//     const temporal_entity_t* negative = kf.add_interval(negative_name);
+    string negative_name = "Отрицательный_интервал_" + std::to_string((uint64_t) cur) + "_" + std::to_string(start_time);
+    const temporal_entity_t* negative = kb.add_interval(negative_name);
 
-//     obj_id = main_object->get_id();
-//     attr_id = dynamic_cast<const temporal_object_t*>(main_object)->get_attr_id_by_name(dbw.get_property_name_by_id(cur->get_prop_id()));
-//     value = std::to_string(cur->get_prop_val());
-//     left = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     left->set_op("<");
+    obj_id = main_object->get_id();
+    attr_id = dynamic_cast<const temporal_object_t*>(main_object)->get_attr_id_by_name(dbw.get_property_name_by_id(cur->get_prop_id()));
+    value = std::to_string(cur->get_prop_val());
+    left = new condition_attr_value_const_t(obj_id, attr_id, value);
+    left->set_op("<");
 
-//     obj_id = timer->get_id();
-//     attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
-//     value = std::to_string((stoi(dbw.get_time_name_by_id(cur->get_time_id())) + start_time) % last_time);
-//     right = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     right->set_op("=");
+    obj_id = timer->get_id();
+    attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
+    value = std::to_string((stoi(dbw.get_time_name_by_id(cur->get_time_id())) + start_time) % last_time);
+    right = new condition_attr_value_const_t(obj_id, attr_id, value);
+    right->set_op("=");
 
-//     start_condition = new complex_condition_t();
-//     start_condition->set_op("&");
-//     start_condition->add_condition(left);
-//     start_condition->add_condition(right);
+    start_condition = new complex_condition_t();
+    start_condition->set_op("&");
+    start_condition->add_condition(left);
+    start_condition->add_condition(right);
 
-//     kf.set_start_condition(negative, start_condition);
+    kb.set_start_condition(negative, start_condition);
 
-//     obj_id = timer->get_id();
-//     attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
-//     value = std::to_string((start_time + last_time - 1) % last_time);
-//     end_condition = new condition_attr_value_const_t(obj_id, attr_id, value);
-//     end_condition->set_op("=");
+    obj_id = timer->get_id();
+    attr_id = dynamic_cast<const temporal_object_t*>(timer)->get_attr_id_by_name("такт");
+    value = std::to_string((start_time + last_time - 1) % last_time);
+    end_condition = new condition_attr_value_const_t(obj_id, attr_id, value);
+    end_condition->set_op("=");
 
-//     kf.set_end_condition(negative, end_condition);
+    kb.set_end_condition(negative, end_condition);
 
-//     if (cur->get_left())
-//       st.push(cur->get_left());
-//     if (cur->get_right())
-//       st.push(cur->get_right());
-//   }
+    if (cur->get_left())
+      st.push(cur->get_left());
+    if (cur->get_right())
+      st.push(cur->get_right());
+  }
 
-//   vector<event_interval_condition_t*> up_conditions;
-//   add_rules(root, kf, up_conditions, start_time, last_time);
-// }
+  vector<event_interval_condition_t*> up_conditions;
+  add_rules(root, kb, up_conditions, start_time, last_time);
+}
