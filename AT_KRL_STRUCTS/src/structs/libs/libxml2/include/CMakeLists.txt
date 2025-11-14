@@ -1,5 +1,0 @@
-file(GLOB INCLUDE_FILES "libxml/*.h")
-install(FILES
-    ${INCLUDE_FILES}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libxml)
-

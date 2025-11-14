@@ -190,7 +190,7 @@ string tree_t::serialize(tree_node_t* node) const {
    return serialize(root);
 }
 
-void tree_t::add_rules(tree_node_t* node, knowledge_field_t& kb, vector<event_interval_condition_t*> up_conditions, int start_time, int last_time) const {
+void tree_t::add_rules(tree_node_t* node, knowledge_base_t& kb, vector<event_interval_condition_t*> up_conditions, int start_time, int last_time) const {
   string current_time_name = "Текущий_такт_" + std::to_string((start_time + last_time - 1) % last_time);
   string next_time_name = "Текущий_такт_" + std::to_string(start_time % last_time);
   if (node->is_leaf()) {
@@ -239,7 +239,7 @@ void tree_t::add_rules(tree_node_t* node, knowledge_field_t& kb, vector<event_in
   }
 }
 
-void tree_t::rulealize(knowledge_field_t& kb, const temporal_entity_t* main_object, const temporal_entity_t* timer, const temporal_entity_t*, int start_time, int last_time) const {
+void tree_t::rulealize(knowledge_base_t& kb, const temporal_entity_t* main_object, const temporal_entity_t* timer, const temporal_entity_t*, int start_time, int last_time) const {
   std::stack<tree_node_t*> st;
   st.push(root);
   while (!st.empty()) {

@@ -11,7 +11,9 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
 
-include_directories(${CMAKE_SOURCE_DIR}/src/structs/libs/libxml2/include/)
+
+find_package(LibXml2 REQUIRED)
+#include_directories(${CMAKE_SOURCE_DIR}/src/structs/libs/libxml2/include/)
 include_directories(${CMAKE_SOURCE_DIR}/src/structs/libs/jsoncpp/include/)
 
 
@@ -37,7 +39,7 @@ add_library(${PROJECT_NAME} STATIC
             src/structs/src/membership_function.cpp
             src/structs/src/non_factor.cpp
             src/structs/libs/jsoncpp/include/CMakeLists.txt
-            src/structs/libs/libxml2/include/CMakeLists.txt
+            #src/structs/libs/libxml2/include/CMakeLists.txt
             src/tests/kb_entity_tests.cpp
             src/tests/kb_operation_tests.cpp
             src/tests/kb_reference_tests.cpp
@@ -49,12 +51,13 @@ add_library(${PROJECT_NAME} STATIC
 
         )
 
+target_link_libraries(AT_KRL_STRUCTS PRIVATE LibXml2::LibXml2)
 target_include_directories(${PROJECT_NAME} PUBLIC
     src/
     src/structs/
     src/structs/include/
     src/structs/src/
-    src/structs/libs/libxml2/include/
+    ../../../work/vcpcg/vcpkg/installed/x64-windows/include/libxml2
     src/structs/libs/jsoncpp/include/
     src/structs/libs/googletest/include/
 )

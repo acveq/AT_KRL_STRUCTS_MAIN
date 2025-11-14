@@ -37,7 +37,7 @@ void model_t::rulealize(std::ostream& text_out, std::ostream& inner_out, std::os
 
     //const temporal_entity_t* main_object = kf->add_object("Главный_объект");
 
-    kb = knowledge_field_t();
+    kb = knowledge_base_t();
     //kb.getRules();
 
   const temporal_entity_t* main_object = kb.add_object("Главный_объект");
